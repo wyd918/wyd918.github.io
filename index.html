@@ -4,18 +4,25 @@
   <meta charset="UTF-8">
   <title>我的第一个网页</title>
   <style>
-    body { text-align: center; }   /* 关键一句 */
+    body {
+       text-align: center; 
+       margin: 0;
+       height: 100vh;
+       background:url("image/background.jpeg") center/cover no-repeat fixed
+      }   /* 关键一句 */
   </style>
 </head>
 <body>
-  <h1>你好，世界！</h1>
-  <h2>王元地</h2>
-  <p>这是我的第一个网页。</p>
-  <p>很高兴认识你</p>
-  <p>这一行文字会居中</p>
-  <h2>美好的新生活在向我招手</h2>
-  <img src="Andy.jpg" alt="Andy" width="300">
+  <h1 style="color: white;">你好，世界！</h1>
+  <h2 style="color: white;">王元地</h2>
+  <p style="color: white;">这是我的网页</p>
+  <p style="color: white;">很高兴认识你</p>
+  <p style="color: white;">这一行文字会居中</p>
+  <p style="color: white;">正常文字 <span style="display:inline-block; width:10px;"></span>右移 10px</span> 继续。</p>
+  <h2 style="color: white;">美好的新生活在向我招手</h2>
+  <!-- 本地图 -->
+  <img src="image/Andy.jpg" alt="Andy" width="300">
   <br>
-  <a href="https://www.example.com">点击这里</a>
+  <a style="color: white;" href="practice.html">点击这里</a>
 </body>
 </html>
