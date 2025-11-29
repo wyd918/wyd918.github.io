@@ -1,28 +1,169 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>我的第一个网页</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>王元地 - 简历</title>
   <style>
+    :root {
+      --theme: #005a9c;
+      --gray: #555;
+    }
     body {
-       text-align: center; 
-       margin: 0;
-       height: 100vh;
-       background:url("image/background.jpeg") center/cover no-repeat fixed
-      }   /* 关键一句 */
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 40px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, .1);
+      position: relative;
+    }
+    /* 右上角长方形头像 */
+    .avatar {
+      position: absolute;
+      top: 30px;
+      right: 80px;
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border: 2px solid var(--theme);
+      border-radius: 4px;
+    }
+    /* 给 header 增加右侧占位，防止文字被遮挡 */
+    .header {
+      margin-right: 180px;
+      margin-bottom: 30px;
+    }
+    .header h1 {
+      margin: 0 0 5px;
+      color: var(--theme);
+    }
+    .contact {
+      font-size: 14px;
+      color: var(--gray);
+    }
+    /* 已在你 style 标签里追加即可 */
+.date {
+  margin-left: 100px;   /* 两段文字间距 20 px */
+  white-space: nowrap; /* 防止日期被换行 */
+}
+    h2 {
+      color: var(--theme);
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+      margin: 0 0 10px;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    .job, .project {
+      margin-bottom: 20px;
+    }
+    .job-title, .project-title {
+      font-weight: bold;
+      color: var(--theme);
+    }
+    @media print {
+      body {
+        background: #fff;
+      }
+      .container {
+        box-shadow: none;
+      }
+    }
   </style>
+<base target="_blank">
 </head>
 <body>
-  <h1 style="color: white;">你好，世界！</h1>
-  <h2 style="color: white;">王元地</h2>
-  <p style="color: white;">这是我的网页</p>
-  <p style="color: white;">很高兴认识你</p>
-  <p style="color: white;">这一行文字会居中</p>
-  <p style="color: white;">正常文字 <span style="display:inline-block; width:10px;"></span>右移 10px</span> 继续。</p>
-  <h2 style="color: white;">美好的新生活在向我招手</h2>
-  <!-- 本地图 -->
-  <img src="image/Andy.jpg" alt="Andy" width="300">
-  <br>
-  <a style="color: white;" href="practice.html">点击这里</a>
+  <div class="container">
+    <!-- 右上角长方形头像 -->
+    <img src="image/wyd.jpg" alt="头像" class="avatar"/>
+
+    <!-- 基本信息 -->
+    <div class="header">
+      <h1>王元地</h1>
+      <div class="contact">
+        电话：191XXXX2257（微信同号） | 邮箱：139XXXX655@qq.com<br/>
+        年龄：25岁 | 学历：全日制本科 | 籍贯：河南省信阳市
+      </div>
+    </div>
+
+    <!-- 以下内容为原有简历模块，未改动 -->
+    <section>
+      <h2>教育背景</h2>
+      <div class="job">
+        <div class="job-title">
+          西北工业大学 - 数学与应用数学（本科）  
+          <span class="date">2020.09 - 2024.06</span>
+        </div>
+        <ul>
+          <li><strong>社团经历</strong>：西北工业大学学生读书协会办公室部长（2022.09 - 2023.06）</li>
+          <li><strong>荣誉奖励</strong>：西北工业大学“工大出版社杯”第二十四届数学建模大赛校赛三等奖（2023.05）</li>
+          <li><strong>学术项目</strong>：基于自适应网格的三维仿生鱼数值仿真模拟研究（2022.09 - 2023.06）</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>工作经历</h2>
+      <div class="job">
+        <div class="job-title">上海猪哆哆餐饮管理有限公司 - 数据管培生</div>
+        <div>2024.10 - 2025.05</div>
+        <ul>
+          <li>报表开发：独立开发多套针对性报表，涵盖管理层战略决策支持与部门日常监控。</li>
+          <li>数仓开发：参与数仓项目全链路，保障数据准确性与稳定性。</li>
+          <li>运维和调度：构建运维体系，确保数据准时上线，支撑业务需求。</li>
+          <li>文档与沟通：输出开发文档与PPT，跨部门协作，解答数据疑问。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>项目经验</h2>
+      <div class="project">
+        <div class="project-title">项目1：数据指标体系重建项目（负责人）</div>
+        <ul>
+          <li>背景：原低代码平台无法满足业务增长，需重建MySQL数仓并迁移报表。</li>
+          <li>职责：主导多主题数据建模与迁移，构建高效数据模型，确保系统稳定运行。</li>
+          <li>成果：实现数据可视化与精准分析，为管理层提供全面决策支持。</li>
+        </ul>
+      </div>
+      <div class="project">
+        <div class="project-title">项目2：BI驾驶舱项目（核心成员）</div>
+        <ul>
+          <li>背景：解决“数据孤岛”问题，提升决策科学性与时效性。</li>
+          <li>职责：完成数据抽取、清洗、建模与BI报表搭建，展示数据洞察。</li>
+          <li>成果：打通业务系统，构建统一数据决策平台。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>技能特长</h2>
+      <ul>
+        <li>编程语言：熟练掌握C、Python、JavaScript，熟练运用SQL、MATLAB，精通Linux操作系统。</li>
+        <li>报表开发：熟练使用衡石BI、飞书、明道云低代码平台，具备数据可视化看板搭建能力。</li>
+        <li>数据建模：深入理解数据仓库建模方法，拥有丰富的维度建模经验。</li>
+        <li>文档与沟通：熟练使用MythType、LaTeX，文档撰写能力强，沟通积极主动。</li>
+        <li>英语水平：大学英语六级（CET-6），能阅读英文文献，了解行业前沿。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>自我评价</h2>
+      <p>
+        具备扎实的数学与应用数学专业基础，熟练掌握多种编程语言与数据开发工具，能独立完成数据全链路开发工作。
+        具备良好的沟通能力与团队协作精神，能够快速适应业务场景并挖掘数据价值。
+        对新技术保持敏锐洞察力，具备持续学习与解决复杂问题的能力。
+      </p>
+    </section>
+  </div>
 </body>
 </html>
