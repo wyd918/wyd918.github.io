@@ -1,59 +1,328 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<title>左侧固定，右侧滚动</title>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-/* 1. 整体左右分栏 */
-.wrapper {
-  display: flex;
-}
-
-/* 2. 左边 1/3 不动 */
-.left {
-  width: 33.333%;
-  position: sticky;   /* 关键 */
-  top: 0;             /* 贴顶 */
-  height: 100vh;      /* 撑满视口，避免塌陷 */
-  background: #f5f5f5;
-  padding: 20px;
-  overflow: hidden;   /* 如果左侧内容多，可加 auto */
-}
-
-/* 3. 右边 2/3 可滚动 */
-.right {
-  width: 66.666%;
-  padding: 30px;
-}
-</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>王元地 - 实践项目展示</title>
+  <style>
+    :root {
+      --theme: #005a9c;
+      --gray: #555;
+      --light-gray: #f8f9fa;
+      --border-color: #e9ecef;
+      --success-color: #28a745;
+      --warning-color: #ffc107;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, var(--theme) 0%, #0078d4 100%);
+      color: white;
+      padding: 30px 40px;
+      text-align: center;
+    }
+    
+    .header h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    
+    .header p {
+      opacity: 0.9;
+      font-size: 1.1rem;
+    }
+    
+    .main-content {
+      padding: 40px;
+    }
+    
+    .back-link {
+      display: inline-block;
+      margin-bottom: 30px;
+      color: var(--theme);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 16px;
+      border: 1px solid var(--theme);
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .back-link:hover {
+      background: var(--theme);
+      color: white;
+    }
+    
+    .project-showcase {
+      margin-bottom: 40px;
+    }
+    
+    .project-card {
+      background: var(--light-gray);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 25px;
+      border-left: 4px solid var(--theme);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .project-title {
+      font-size: 1.3rem;
+      color: var(--theme);
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .tech-tag {
+      background: var(--theme);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    .project-description {
+      line-height: 1.8;
+      color: var(--gray);
+      margin-bottom: 15px;
+    }
+    
+    .project-features {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .project-features li {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 8px;
+      color: var(--gray);
+    }
+    
+    .project-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success-color);
+      font-weight: bold;
+    }
+    
+    .achievements {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 30px;
+    }
+    
+    .achievements h2 {
+      color: var(--theme);
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+    
+    .achievement-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .achievement-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--theme);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    
+    .achievement-content {
+      flex: 1;
+    }
+    
+    .achievement-title {
+      font-weight: 600;
+      color: var(--gray);
+      margin-bottom: 5px;
+    }
+    
+    .achievement-desc {
+      color: var(--gray);
+      font-size: 14px;
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px;
+      }
+      
+      .main-content {
+        padding: 30px 20px;
+      }
+      
+      .header h1 {
+        font-size: 1.6rem;
+      }
+      
+      .project-tech {
+        gap: 6px;
+      }
+      
+      .tech-tag {
+        font-size: 11px;
+        padding: 3px 8px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-<div class="wrapper">
-  <aside class="left">
-    <h2>左侧导航</h2>
-    <p>这里无论右侧怎么滑，我始终在视口。</p>
-  </aside>
-
-  <main class="right">
-    <h1>右侧内容</h1>
-    <!-- 本地图 -->
-  <img src="image/Andy.jpg" alt="Andy" width="300">
-  <br>
-  <!-- 本地图 -->
-  <img src="image/Andy.jpg" alt="Andy" width="300">
-    <!-- 多复制几段即可看到滚动 -->
-    <p>向下刷内容…</p>
-    <p>向下刷内容…</p>
-    <p>向下刷内容…</p>
-    <p>向下刷内容…</p>
-    <p>向下刷内容…</p>
-    <p>向下刷内容…</p>
-    <p>向下刷内容…</p>
-    <p>到底了。</p>
-  </main>
-</div>
+  <div class="container">
+    <div class="header">
+      <h1>实践项目展示</h1>
+      <p>王元地 - 数据开发工程师</p>
+    </div>
+    
+    <div class="main-content">
+      <a href="index.html" class="back-link">← 返回简历</a>
+      
+      <div class="project-showcase">
+        <div class="project-card">
+          <div class="project-title">数据指标体系重建项目</div>
+          <div class="project-tech">
+            <span class="tech-tag">MySQL</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">数据建模</span>
+            <span class="tech-tag">ETL</span>
+          </div>
+          <div class="project-description">
+            针对原有低代码平台无法满足业务快速增长需求的痛点，主导完成了数据指标体系的全面重建工作。
+          </div>
+          <ul class="project-features">
+            <li>设计并实现了多主题数据仓库模型，包含用户行为、订单、商品等核心主题</li>
+            <li>开发了自动化数据迁移工具，确保历史数据的完整性和准确性</li>
+            <li>构建了实时数据管道，支持业务实时监控和分析需求</li>
+            <li>优化查询性能，复杂查询响应时间从30秒降低到3秒以内</li>
+          </ul>
+        </div>
+        
+        <div class="project-card">
+          <div class="project-title">BI驾驶舱项目</div>
+          <div class="project-tech">
+            <span class="tech-tag">衡石BI</span>
+            <span class="tech-tag">数据可视化</span>
+            <span class="tech-tag">API开发</span>
+            <span class="tech-tag">数据治理</span>
+          </div>
+          <div class="project-description">
+            为解决企业"数据孤岛"问题，构建统一的数据决策平台，提升管理层的决策科学性和时效性。
+          </div>
+          <ul class="project-features">
+            <li>打通了ERP、CRM、POS等多个业务系统的数据壁垒</li>
+            <li>设计了管理层驾驶舱，包含销售、库存、财务等核心KPI指标</li>
+            <li>实现了移动端适配，支持随时随地查看业务数据</li>
+            <li>建立了数据权限管理体系，确保数据安全和合规性</li>
+          </ul>
+        </div>
+        
+        <div class="project-card">
+          <div class="project-title">三维仿生鱼数值仿真研究</div>
+          <div class="project-tech">
+            <span class="tech-tag">MATLAB</span>
+            <span class="tech-tag">数值计算</span>
+            <span class="tech-tag">自适应网格</span>
+            <span class="tech-tag">流体力学</span>
+          </div>
+          <div class="project-description">
+            基于自适应网格技术，研究仿生鱼在水中的运动特性，为水下机器人设计提供理论支撑。
+          </div>
+          <ul class="project-features">
+            <li>建立了三维仿生鱼运动数学模型</li>
+            <li>实现了自适应网格算法，提高了计算精度</li>
+            <li>分析了不同游动参数对推进效率的影响</li>
+            <li>研究成果发表于相关学术期刊</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="achievements">
+        <h2>个人成就</h2>
+        <div class="achievement-item">
+          <div class="achievement-icon">🏆</div>
+          <div class="achievement-content">
+            <div class="achievement-title">数学建模大赛三等奖</div>
+            <div class="achievement-desc">西北工业大学"工大出版社杯"第二十四届数学建模大赛</div>
+          </div>
+        </div>
+        
+        <div class="achievement-item">
+          <div class="achievement-icon">📊</div>
+          <div class="achievement-content">
+            <div class="achievement-title">数据体系建设贡献奖</div>
+            <div class="achievement-desc">参与公司数据仓库从零到一的构建过程</div>
+          </div>
+        </div>
+        
+        <div class="achievement-item">
+          <div class="achievement-icon">🎯</div>
+          <div class="achievement-content">
+            <div class="achievement-title">优秀员工</div>
+            <div class="achievement-desc">在数据管培生项目中表现突出，获得团队认可</div>
+          </div>
+        </div>
+        
+        <div class="achievement-item">
+          <div class="achievement-icon">📚</div>
+          <div class="achievement-content">
+            <div class="achievement-title">读书协会部长</div>
+            <div class="achievement-desc">组织多场读书分享活动，提升校园文化氛围</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
